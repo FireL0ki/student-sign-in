@@ -26,6 +26,7 @@
 
 export default {
     name: 'NewStudentForm',
+    emits: ['student-added'], // documents events the component emits
     data() {
         return {
             newStudentName: '',

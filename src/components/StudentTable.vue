@@ -18,7 +18,7 @@
                         <td>{{ student.name }}</td>
                         <td>{{ student.starID }}</td>
                         <td>
-                            <input type="checkbox" v-model="student.present" v-on:change="arrivedOrLeft(student)">
+                            <input type="checkbox" v-bine:checked="student.present" v-on:change="arrivedOrLeft(student, $event.target.checked)">
                         </td>
                     </tr>
 
@@ -35,12 +35,14 @@
 export default {
     // create component here
     name: 'StudentTable',
+    emits: ['student-arrived-or-left'],
     props: {
         students: Array
     },
     methods: {
-        arrivedOrLeft() {
+        arrivedOrLeft(student, present) {
             // TODO emit message to parent
+            this.$emit('student-arrived-or-left', student, present)
         }
     }
 }
@@ -48,5 +50,17 @@ export default {
 
 
 <style scoped>
+
+.present {
+    color: gray;
+    font-style: italic;
+}
+
+.absent {
+    color: black;
+    font-weight: bold;
+}
+
+
 
 </style>
