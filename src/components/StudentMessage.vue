@@ -5,10 +5,13 @@
 
         <div class="alert alert-success" v-if="mostRecentStudent.present">
             Welcome, {{ student.name }}
+        </div>
+        
     </div>
 
     <div class="alert alert-info" v-else>
         Goodbye, {{ student.name }}. See you later!
+    </div>
 
 </template>
 

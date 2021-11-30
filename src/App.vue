@@ -2,10 +2,9 @@
   <div id="app">
 
     <new-student-form v-on:student-added="newStudentAdded"></new-student-form>
-    <student-table 
-      v-bind:students="students"
+    <student-table v-bind:students="students"
       v-on:student-arrived-or-left="studentArrivedOrLeft"
-      v-on:delete-student="studentDeleted">
+      v-on:delete-student="deleteStudent">
     </student-table>
     <student-message v-bind:student="mostRecentStudent"></student-message>
 
@@ -19,19 +18,18 @@ import StudentTable from './components/StudentTable.vue'
 
 export default {
   name: 'App',  
+    components: {
+    NewStudentForm,
+    StudentMessage,
+    StudentTable,
+  },
   data() {
     return {
       students: [
         { name: 'Example', 'starID': 'aa1234aa', present: true },
-        { name: 'Test', 'starID': 'zz3452uu', present: false },
       ],
       mostRecentStudent: {}
     }
-  },
-  components: {
-    NewStudentForm,
-    StudentMessage,
-    StudentTable,
   },
 
   methods: {
@@ -41,7 +39,7 @@ export default {
           return s1.name.toLowerCase() < s2.name.toLowerCase() ? -1 : 1
         })
     },
-    studentArrivedOrLeft() {
+    studentArrivedOrLeft(student, present) {
       // find student in array of students
       // update present attribute
 
@@ -57,6 +55,14 @@ export default {
         this.mostRecentStudent = updateStudent
       }
     }
+  },
+  deleteStudent(student) {  
+    // filter will check every student in the students array -- another method that could be used here: splice
+    this.students = this.students.filter( function(s) {
+      if (s != student) {
+        return true
+      }
+    })
   }
 }
 </script>

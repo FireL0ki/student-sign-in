@@ -1,0 +1,43 @@
+<template> 
+    <tr v-bind:class=" { present: student.present, absent: !student.present } ">
+        <!-- student is the name of the vue data property (in the app) -->
+        <td>{{ student.name }}</td>
+        <td>{{ student.starID }}</td>
+        <td> <input type="checkbox" v-bine:checked="student.present" v-on:change="arrivedOrLeft(student, $event.srcElement.checked)"></td>
+        <td> <img v-on:click="deleteStudent" src="@/assets/delete.png"> </td> <!-- @ symbol shortcut for src directory -->
+    </tr>
+
+</template>
+
+<script>
+export default {
+    name: 'StudentRow',
+    props: {
+        student: Object
+    },
+    methods: {
+        arrivedOrLeft(student, present) {
+            this.$emit('student-arrived-or-left', student, present)
+        },
+        deleteStudent() {
+            this.$emit('delete-student', this.student)
+        }
+    }
+
+}
+
+</script>
+
+<style scoped>
+
+.present {
+    color: gray;
+    font-style: italic;
+}
+
+.absent {
+    color: black;
+    font-weight: bold;
+}
+
+</style>

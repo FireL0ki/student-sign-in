@@ -2,7 +2,6 @@
     
     <div>
         <!-- Template/HTML here -->
-
         <div class="card student-list m-2 p-2">
             <h4 class="card-title">Student List</h4>
             <div id="student-table">
@@ -13,29 +12,31 @@
                         <th>Present?</th>
                     </tr>
 
-                    <tr v-for="student in students" v-bind:key="student.starID" v-bind:class=" { present: student.present, absent: !student.present } ">
-                        <!-- student is the name of the vue data property (in the app) -->
-                        <td>{{ student.name }}</td>
-                        <td>{{ student.starID }}</td>
-                        <td>
-                            <input type="checkbox" v-bine:checked="student.present" v-on:change="arrivedOrLeft(student, $event.target.checked)">
-                        </td>
-                    </tr>
+                    <student-row 
+                        v-for="student in students" 
+                        v-bind:students="student" v-bind:key="student.starID"
+                        v-on:student-arrived-or-left="arrivedOrLeft"
+                        v-on:delete-student="deleteStudent">
+                        
+                    </student-row>
 
                 </table>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <script>
 
+import StudentRow from '@/components/StudentRow.vue'
+
 export default {
     // create component here
     name: 'StudentTable',
-    emits: ['student-arrived-or-left'],
+    components: {
+        StudentRow
+    },
+    emits: ['student-arrived-or-left'], // What is this?
     props: {
         students: Array
     },
@@ -43,6 +44,9 @@ export default {
         arrivedOrLeft(student, present) {
             // TODO emit message to parent
             this.$emit('student-arrived-or-left', student, present)
+        },
+        deleteStudent(student) {
+            this.$emit('delete-student', student)
         }
     }
 }
