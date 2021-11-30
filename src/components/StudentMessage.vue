@@ -1,18 +1,14 @@
 <template>
-    
-    <div v-if="student.name">
-        <!-- Template/HTML here -->
-
-        <div class="alert alert-success" v-if="mostRecentStudent.present">
-            Welcome, {{ student.name }}
+    <div>
+        <div v-show="student.name">
+            <div v-if="student.present" class="alert alert-success">
+                Welcome, {{ student.name }}!
+            </div>
+            <div v-else class="alert alert-info">
+                Goodbye, {{ student.name }}. See you later!
+            </div>
         </div>
-        
     </div>
-
-    <div class="alert alert-info" v-else>
-        Goodbye, {{ student.name }}. See you later!
-    </div>
-
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
     
-    <div class="alert alert-danger" v-show="errors.length">
+    <div class="alert alert-danger" v-show="errors.length > 0">
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
     </div>
 
@@ -11,12 +11,10 @@
         <label for="name">Name</label>
         <input id="name" class="form-control" v-model.trim="newStudentName">
     </div>
-
     <div class="form-group">
         <label for="starID">Star ID</label>
         <input id="starID" class="form-control" v-model.trim="newStarID">
     </div>
-
     <button class="btn btn-primary" v-on:click="addStudent">Add</button>
     </div>
 

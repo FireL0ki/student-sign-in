@@ -4,14 +4,15 @@
         <td>{{ student.name }}</td>
         <td>{{ student.starID }}</td>
         <td> <input type="checkbox" v-bine:checked="student.present" v-on:change="arrivedOrLeft(student, $event.srcElement.checked)"></td>
-        <td v-show="edit"> <img v-on:click="deleteStudent" src="@/assets/delete.png"> </td> <!-- @ symbol shortcut for src directory -->
+        <td v-show="edit"> 
+            <img v-on:click="deleteStudent" src="@/assets/delete.png"> </td> <!-- @ symbol shortcut for src directory -->
     </tr>
-
 </template>
 
 <script>
 export default {
     name: 'StudentRow',
+    emits: ['student-arriaved-or-left', 'delete-student'],
     props: {
         student: Object,
         edit: Boolean
@@ -45,7 +46,7 @@ export default {
 
 /* set icon height */
 img {
-    height: 30px;
+    height: 20px;
 }
 
 </style>

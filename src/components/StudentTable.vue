@@ -1,5 +1,4 @@
 <template>
-    
     <div>
         <!-- Template/HTML here -->
         <div class="card student-list m-2 p-2">
@@ -8,6 +7,7 @@
             <div class="edit-table-toggle form-check">
                 <input id="edit-table" type="checkbox" class="form-check-input" v-model="editTable">
                 <label for="edit-table" class="form-check-label">Edit table?</label>
+            </div>
 
             <div id="student-table">
                 <table class="table">
@@ -23,10 +23,8 @@
                         v-bind:students="student" v-bind:key="student.starID"
                         v-bind:edit="editTable"
                         v-on:student-arrived-or-left="arrivedOrLeft"
-                        v-on:delete-student="deleteStudent">
-                        
+                        v-on:delete-student="studentDeleted">
                     </student-row>
-
                 </table>
             </div>
         </div>
@@ -43,7 +41,7 @@ export default {
     components: {
         StudentRow
     },
-    emits: ['student-arrived-or-left'], // What is this?
+    emits: ['student-arrived-or-left', 'delete-student'], 
     props: {
         students: Array
     },

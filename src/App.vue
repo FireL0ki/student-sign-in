@@ -2,7 +2,8 @@
   <div id="app">
 
     <new-student-form v-on:student-added="newStudentAdded"></new-student-form>
-    <student-table v-bind:students="students"
+    <student-table 
+      v-bind:students="students"
       v-on:student-arrived-or-left="studentArrivedOrLeft"
       v-on:delete-student="studentDeleted">
     </student-table>
@@ -13,20 +14,22 @@
 
 <script>
 import NewStudentForm from './components/NewStudentForm.vue'
-import StudentMessage from './components/StudentMessage.vue'
 import StudentTable from './components/StudentTable.vue'
+import StudentMessage from './components/StudentMessage.vue'
 
 export default {
   name: 'App',  
     components: {
     NewStudentForm,
-    StudentMessage,
     StudentTable,
+    StudentMessage,
+
   },
   data() {
     return {
       students: [
         { name: 'Example', 'starID': 'aa1234aa', present: true },
+        { name: 'Example2', 'starID': 'xx4321yy', present: false },
       ],
       mostRecentStudent: {}
     }
@@ -40,9 +43,7 @@ export default {
         })
     },
     studentArrivedOrLeft(student, present) {
-      // find student in array of students
-      // update present attribute
-
+      // find student in this.students, set prsent value
       let updateStudent = this.students.find( function(s) {
         if (s.name === student.name && s.starID === student.starID) {
           // this is the student to update
