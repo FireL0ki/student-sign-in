@@ -4,17 +4,24 @@
         <!-- Template/HTML here -->
         <div class="card student-list m-2 p-2">
             <h4 class="card-title">Student List</h4>
+
+            <div class="edit-table-toggle form-check">
+                <input id="edit-table" type="checkbox" class="form-check-input" v-model="editTable">
+                <label for="edit-table" class="form-check-label">Edit table?</label>
+
             <div id="student-table">
                 <table class="table">
                     <tr>
                         <th>Name</th>
                         <th>StarID</th>
                         <th>Present?</th>
+                        <th v-show="editTable">Delete</th>
                     </tr>
 
                     <student-row 
                         v-for="student in students" 
                         v-bind:students="student" v-bind:key="student.starID"
+                        v-bind:edit="editTable"
                         v-on:student-arrived-or-left="arrivedOrLeft"
                         v-on:delete-student="deleteStudent">
                         
@@ -39,6 +46,11 @@ export default {
     emits: ['student-arrived-or-left'], // What is this?
     props: {
         students: Array
+    },
+    data() {
+        return {
+           editTabel: false 
+        }
     },
     methods: {
         arrivedOrLeft(student, present) {

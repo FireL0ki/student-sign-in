@@ -4,7 +4,7 @@
         <td>{{ student.name }}</td>
         <td>{{ student.starID }}</td>
         <td> <input type="checkbox" v-bine:checked="student.present" v-on:change="arrivedOrLeft(student, $event.srcElement.checked)"></td>
-        <td> <img v-on:click="deleteStudent" src="@/assets/delete.png"> </td> <!-- @ symbol shortcut for src directory -->
+        <td v-show="edit"> <img v-on:click="deleteStudent" src="@/assets/delete.png"> </td> <!-- @ symbol shortcut for src directory -->
     </tr>
 
 </template>
@@ -13,14 +13,17 @@
 export default {
     name: 'StudentRow',
     props: {
-        student: Object
+        student: Object,
+        edit: Boolean
     },
     methods: {
         arrivedOrLeft(student, present) {
             this.$emit('student-arrived-or-left', student, present)
         },
         deleteStudent() {
-            this.$emit('delete-student', this.student)
+            if (confirm(`Delete ${this.student.name}?`)) {
+              this.$emit('delete-student', this.student)  
+            }    
         }
     }
 
@@ -38,6 +41,11 @@ export default {
 .absent {
     color: black;
     font-weight: bold;
+}
+
+/* set icon height */
+img {
+    height: 30px;
 }
 
 </style>

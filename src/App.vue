@@ -4,7 +4,7 @@
     <new-student-form v-on:student-added="newStudentAdded"></new-student-form>
     <student-table v-bind:students="students"
       v-on:student-arrived-or-left="studentArrivedOrLeft"
-      v-on:delete-student="deleteStudent">
+      v-on:delete-student="studentDeleted">
     </student-table>
     <student-message v-bind:student="mostRecentStudent"></student-message>
 
@@ -56,13 +56,16 @@ export default {
       }
     }
   },
-  deleteStudent(student) {  
+  studentDeleted(student) {  
     // filter will check every student in the students array -- another method that could be used here: splice
     this.students = this.students.filter( function(s) {
       if (s != student) {
         return true
       }
     })
+
+    // clear welcome/goodbye message
+    this.mostRecentStudent = {}
   }
 }
 </script>
