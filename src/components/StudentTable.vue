@@ -20,7 +20,7 @@
 
                     <student-row 
                         v-for="student in students" 
-                        v-bind:students="student" v-bind:key="student.starID"
+                        v-bind:student="student" v-bind:key="student.starID"
                         v-bind:edit="editTable"
                         v-on:student-arrived-or-left="arrivedOrLeft"
                         v-on:delete-student="studentDeleted">
@@ -47,7 +47,7 @@ export default {
     },
     data() {
         return {
-           editTabel: false 
+           editTable: false 
         }
     },
     methods: {
@@ -55,7 +55,7 @@ export default {
             // TODO emit message to parent
             this.$emit('student-arrived-or-left', student, present)
         },
-        deleteStudent(student) {
+        studentDeleted(student) {
             this.$emit('delete-student', student)
         }
     }
