@@ -46,7 +46,7 @@ export default {
 
 /* set icon height */
 img {
-    height: 20px;
+    height: 35px;
 }
 
 </style>
