@@ -55,8 +55,8 @@ export default {
         updateStudent.present = present
         this.mostRecentStudent = updateStudent
       }
-    }
-  },
+    },
+  // },  // close curly brace needs to be moved
   studentDeleted(student) {  
     // filter will check every student in the students array -- another method that could be used here: splice
     this.students = this.students.filter( function(s) {
@@ -68,6 +68,7 @@ export default {
     // clear welcome/goodbye message
     this.mostRecentStudent = {}
   }
+  }   // end of methods. 
 }
 </script>
 

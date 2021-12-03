@@ -3,10 +3,10 @@
         <!-- student is the name of the vue data property (in the app) -->
         <td>{{ student.name }}</td>
         <td>{{ student.starID }}</td>
-        <td> <input type="checkbox" v-bine:checked="student.present" v-on:change="arrivedOrLeft(student, $event.srcElement.checked)"></td>
-        <td v-show="edit"> 
+        <td> <input type="checkbox" v-bind:checked="student.present" v-on:change="arrivedOrLeft(student, $event.srcElement.checked)"></td> 
+         <td v-show="edit"> 
             <img v-on:click="deleteStudent" src="@/assets/delete.png"> </td> <!-- @ symbol shortcut for src directory -->
-    </tr>
+     </tr> 
 </template>
 
 <script>
